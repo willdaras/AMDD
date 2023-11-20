@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace AMDD.Animation;
 
+/// <summary>
+/// A basic implementation of an animator state.
+/// </summary>
 public class AnimatorState : IAnimatorState
 {
 	public Animator.Animation playingAnim { get; set; }

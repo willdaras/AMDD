@@ -14,15 +14,15 @@ public static class GetPlayerTree
 
 		AnimatorTree tree = new AnimatorTree();
 
-		Animator.Animation idleAnimationR = new BasicAnimation(new List<AnimationFrame>() { new BasicAnimationFrame(playerTextures.idleTextureR) });
-		Animator.Animation idleAnimationL = new BasicAnimation(new List<AnimationFrame>() { new BasicAnimationFrame(playerTextures.idleTextureL) });
-		Animator.Animation fallingAnimationR = new BasicAnimation(new List<AnimationFrame>() { new BasicAnimationFrame(playerTextures.fallingTextureR) });
-		Animator.Animation fallingAnimationL = new BasicAnimation(new List<AnimationFrame>() { new BasicAnimationFrame(playerTextures.fallingTextureL) });
-		Animator.Animation runAnimationR = new BasicAnimation(new List<AnimationFrame>() 
+		Animator.Animation idleAnimationR = new BasicAnimation(new List<IAnimationFrame>() { new BasicAnimationFrame(playerTextures.idleTextureR) });
+		Animator.Animation idleAnimationL = new BasicAnimation(new List<IAnimationFrame>() { new BasicAnimationFrame(playerTextures.idleTextureL) });
+		Animator.Animation fallingAnimationR = new BasicAnimation(new List<IAnimationFrame>() { new BasicAnimationFrame(playerTextures.fallingTextureR) });
+		Animator.Animation fallingAnimationL = new BasicAnimation(new List<IAnimationFrame>() { new BasicAnimationFrame(playerTextures.fallingTextureL) });
+		Animator.Animation runAnimationR = new BasicAnimation(new List<IAnimationFrame>() 
 										{ new BasicAnimationFrame(playerTextures.runTexturesR[0]), new BasicAnimationFrame(playerTextures.runTexturesR[1]),
 										  new BasicAnimationFrame(playerTextures.runTexturesR[2]), new BasicAnimationFrame(playerTextures.runTexturesR[3]),
 										  new BasicAnimationFrame(playerTextures.runTexturesR[4]), new BasicAnimationFrame(playerTextures.runTexturesR[5]), });
-		Animator.Animation runAnimationL = new BasicAnimation(new List<AnimationFrame>()
+		Animator.Animation runAnimationL = new BasicAnimation(new List<IAnimationFrame>()
 										{ new BasicAnimationFrame(playerTextures.runTexturesL[0]), new BasicAnimationFrame(playerTextures.runTexturesL[1]),
 										  new BasicAnimationFrame(playerTextures.runTexturesL[2]), new BasicAnimationFrame(playerTextures.runTexturesL[3]),
 										  new BasicAnimationFrame(playerTextures.runTexturesL[4]), new BasicAnimationFrame(playerTextures.runTexturesL[5]), });

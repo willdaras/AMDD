@@ -2,6 +2,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace AMDD.Animation.Nodes;
 
+/// <summary>
+/// An directional animation node to differentiate between left and right animations.
+/// </summary>
 public class DirectionalAnimationNode : TerminationNode
 {
 	private Animator.Animation _animationL;

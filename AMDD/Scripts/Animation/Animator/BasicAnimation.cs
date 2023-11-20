@@ -3,11 +3,14 @@ using System.Collections.Generic;
 
 namespace AMDD.Animation.Animator;
 
+/// <summary>
+/// A basic animation.
+/// </summary>
 public class BasicAnimation : Animation
 {
-	private List<AnimationFrame> _frames = new List<AnimationFrame>();
+	private List<IAnimationFrame> _frames = new List<IAnimationFrame>();
 
-	public BasicAnimation(List<AnimationFrame> frames)
+	public BasicAnimation(List<IAnimationFrame> frames)
 	{
 		_frames = frames;
 	}

@@ -2,6 +2,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace AMDD.Animation;
 
+/// <summary>
+/// A representation of an animator behaviour tree, stores the root node and resolves the tree.
+/// </summary>
 public class AnimatorTree : TerminationNode
 {
 	public IAnimatorState currentState;

@@ -5,6 +5,9 @@ using AMDD.ECS.Components;
 
 namespace AMDD.ECS.Systems
 {
+	/// <summary>
+	/// A physics system, updates the position and velocity of entities with the Physics component.
+	/// </summary>
 	public class PhysicsSystem : System
 	{
 		public float DragCoefficient { get; set; } = 0.1f;
@@ -131,6 +134,7 @@ namespace AMDD.ECS.Systems
 			{
 				if (otherEntity == entity) { continue; }
 				Collider otherCollider = otherEntity.GetComponent<Collider>();
+				if (otherCollider.collisionLayer != collider.collisionLayer) { continue; }
 				if (collider.collider.Intersects(otherCollider.collider))
 				{
 					HandleCollisionResponse(entity, position, collider, otherCollider, physics, axisVelocity, isXAxis);

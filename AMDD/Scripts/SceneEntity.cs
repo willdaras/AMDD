@@ -20,5 +20,6 @@ public class SceneEntity : Entity
 	{
 		this.position = new Position(position);
 		AddComponent(this.position);
+		name = AddComponent<Name>();
 	}
 }

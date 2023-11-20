@@ -2,7 +2,10 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace AMDD.Animation.Animator;
 
-public class BasicAnimationFrame : AnimationFrame
+/// <summary>
+/// A basic implementation of an animation frame
+/// </summary>
+public class BasicAnimationFrame : IAnimationFrame
 {
 	private Texture2D _texture;
 
@@ -11,7 +14,7 @@ public class BasicAnimationFrame : AnimationFrame
 		_texture = texture;
 	}
 
-	public override Texture2D GetImage()
+	public Texture2D GetImage()
 	{
 		return _texture;
 	}
