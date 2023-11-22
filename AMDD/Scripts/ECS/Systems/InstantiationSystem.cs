@@ -17,6 +17,11 @@ public class InstantiationSystem : System
 		{
 			entities.AddNewEntity(sceneEntity);
 		}
-		entities.instantiationBuffer.entitiesToInstantiate.Clear();
+		entities.instantiationBuffer.entitiesToInstantiate = new List<SceneEntity>();
+		foreach (SceneEntity entity in entities.instantiationBuffer.entitiesToDestroy)
+		{
+			entities.RemoveEntity(entity);
+		}
+		entities.instantiationBuffer.entitiesToDestroy = new List<SceneEntity>();
 	}
 }

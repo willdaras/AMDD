@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using AMDD.ECS.Components;
+using System.Data;
 
 namespace AMDD.ECS.Systems
 {
@@ -18,8 +19,11 @@ namespace AMDD.ECS.Systems
 		{
 			List<Entity> colliders = entities.GetEntitiesWithComponents(typeof(Collider));
 
+			MoveColliders(colliders);
+
 			foreach (Entity entity in entities.GetEntitiesWithComponents(RequiredComponents))
 			{
+				if (entity.HasComponent<Static>()) { continue; }
 				UpdateEntityPhysics(entity, colliders, deltaTime);
 			}
 		}
@@ -99,21 +103,22 @@ namespace AMDD.ECS.Systems
 			Physics physics = entity.GetComponent<Physics>();
 			Vector2 velocity = physics.velocity;
 
-			MoveAxis(entity, position, physics, colliders, velocity, deltaTime, true);
-			MoveAxis(entity, position, physics, colliders, velocity, deltaTime, false);
+			Collider collider = entity.GetComponent<Collider>();
+			collider.collidingWith.enabled = false;
+
+			MoveAxis(entity, position, physics, collider, colliders, velocity, deltaTime, true);
+			MoveAxis(entity, position, physics, collider, colliders, velocity, deltaTime, false);
 		}
 
-		private void MoveAxis(Entity entity, Position position, Physics physics, List<Entity> colliders, Vector2 velocity, float deltaTime, bool isXAxis)
+		private void MoveAxis(Entity entity, Position position, Physics physics, Collider collider, List<Entity> colliders, Vector2 velocity, float deltaTime, bool isXAxis)
 		{
 			float axisVelocity = isXAxis ? velocity.X : velocity.Y;
-			Collider collider = entity.GetComponent<Collider>();
-			collider.collisionState = Collider.CollisionState.NotColliding;
 			if (collider.continuous)
 			{
 				for (int i = 0; i < MathF.Abs(axisVelocity); i++)
 				{
 					position.position += new Vector2(isXAxis ? MathF.Sign(axisVelocity) : 0, isXAxis ? 0 : MathF.Sign(axisVelocity)) * deltaTime;
-					MoveColliders(colliders);
+					MoveCollider(entity);
 					if (CollisionAxis(entity, position, colliders, physics, MathF.Sign(axisVelocity), isXAxis))
 						return;
 				}
@@ -121,7 +126,7 @@ namespace AMDD.ECS.Systems
 			else
 			{
 				position.position += new Vector2(isXAxis ? axisVelocity : 0, isXAxis ? 0 : axisVelocity) * deltaTime;
-				MoveColliders(colliders);
+				MoveCollider(entity);
 				CollisionAxis(entity, position, colliders, physics, axisVelocity, isXAxis);
 			}
 
@@ -156,18 +161,26 @@ namespace AMDD.ECS.Systems
 
 		private void HandleCollisionResponse(Entity entity, Position position, Collider collider, Collider otherCollider, Physics physics, float axisVelocity, bool isXAxis)
 		{
-			position.position = new Vector2(isXAxis ? MathF.Floor(collider.lastValidPos.X) : position.position.X,
-				isXAxis ? position.position.Y : MathF.Floor(collider.lastValidPos.Y));
+			position.position = new Vector2(isXAxis ? ((MathF.Sign(axisVelocity) > 0) ? MathF.Floor(collider.lastValidPos.X) : MathF.Ceiling(collider.lastValidPos.X)) : position.position.X,
+				isXAxis ? position.position.Y : ((MathF.Sign(axisVelocity) > 0) ? MathF.Floor(collider.lastValidPos.Y) : MathF.Ceiling(collider.lastValidPos.Y)));
 
 			physics.velocity = isXAxis ? new Vector2(0, physics.velocity.Y) : new Vector2(physics.velocity.X, 0);
 
-			collider.collisionState = Collider.CollisionState.Colliding;
+			collider.collidingWith.value = entity;
+			collider.collidingWith.enabled = true;
 		}
 
+		private void MoveCollider(Entity entity)
+		{
+			Position position = entity.GetComponent<Position>();
+			Collider collider = entity.GetComponent<Collider>();
+			collider.collider = new Rectangle(new Point().FromVector(position.position + collider.offset), collider.collider.Size);
+		}
 		private void MoveColliders(List<Entity> colliders)
 		{
 			foreach (Entity entity in colliders)
 			{
+				//if (entity.HasComponent<Static>()) { continue; }
 				Position position = entity.GetComponent<Position>();
 				Collider collider = entity.GetComponent<Collider>();
 				collider.collider = new Rectangle(new Point().FromVector(position.position + collider.offset), collider.collider.Size);

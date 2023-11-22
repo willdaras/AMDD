@@ -100,5 +100,4 @@ public abstract class Entity
 	{
 		return Components.Any(c => c.GetType() == componentType);
 	}
-
 }

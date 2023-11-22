@@ -48,15 +48,17 @@ namespace AMDD
 			_scene = new Scene();
 
 			// TODO: use this.Content to load your game content here
+			GameData.spriteBatch = _spriteBatch;
+			GameData.contentManager = Content;
 
 			_scene.systems.Add(new InstantiationSystem());
 			_scene.systems.Add(new InputSystem());
 			_scene.systems.Add(new GravitySystem());
 			_scene.systems.Add(new PlayerControllerSystem());
 			_scene.systems.Add(new PlayerAnimationSystem());
+			_scene.systems.Add(new BulletSystem());
 			_scene.systems.Add(new AnimationSystem());
 
-			GameData.spriteBatch = _spriteBatch;
 
 			// TODO this is disgusting, FIX
 			Entity entity = new SceneEntity();

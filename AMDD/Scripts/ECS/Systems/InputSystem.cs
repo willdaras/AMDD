@@ -19,6 +19,8 @@ public class InputSystem : System
 			Components.Input input = entity.GetComponent<Components.Input>();
 			input.moveDir = inputState.movementDir;
 			input.jumping = inputState.jumping;
+			input.shooting = inputState.shooting;
+			input.aimDir = inputState.aimDir;
 		}
 	}
 }
