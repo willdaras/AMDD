@@ -9,4 +9,5 @@ public struct InputState
 
 	public bool shooting;
 	public Vector2 aimDir;
+	public bool aiming;
 }

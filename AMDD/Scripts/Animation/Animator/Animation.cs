@@ -9,5 +9,5 @@ public abstract class Animation
 {
 	public int frame { get; protected set; }
 
-	public abstract Texture2D GetFrame(IAnimatorState state);
+	public abstract IAnimationFrame GetFrame(IAnimatorState state);
 }

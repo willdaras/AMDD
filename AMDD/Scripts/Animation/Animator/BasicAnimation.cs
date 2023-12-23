@@ -15,7 +15,7 @@ public class BasicAnimation : Animation
 		_frames = frames;
 	}
 
-	public override Texture2D GetFrame(IAnimatorState state)
+	public override IAnimationFrame GetFrame(IAnimatorState state)
 	{
 		if (state.playingAnim == this)
 		{
@@ -30,6 +30,6 @@ public class BasicAnimation : Animation
 			frame = 0;
 		}
 		state.playingAnim = this;
-		return _frames[frame].GetImage();
+		return _frames[frame];
 	}
 }

@@ -5,7 +5,10 @@ using AMDD.ECS.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.IO;
 
 namespace AMDD
 {
@@ -39,6 +42,12 @@ namespace AMDD
 			base.Initialize();
 		}
 
+		public void SetGlobalData()
+		{
+			GameData.spriteBatch = _spriteBatch;
+			GameData.contentManager = Content;
+		}
+
 		protected override void LoadContent()
 		{
 			_spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -47,9 +56,9 @@ namespace AMDD
 
 			_scene = new Scene();
 
+			SetGlobalData();
+
 			// TODO: use this.Content to load your game content here
-			GameData.spriteBatch = _spriteBatch;
-			GameData.contentManager = Content;
 
 			_scene.systems.Add(new InstantiationSystem());
 			_scene.systems.Add(new InputSystem());
@@ -58,6 +67,8 @@ namespace AMDD
 			_scene.systems.Add(new PlayerAnimationSystem());
 			_scene.systems.Add(new BulletSystem());
 			_scene.systems.Add(new AnimationSystem());
+			_scene.systems.Add(new HealthSystem());
+			_scene.systems.Add(new DestroyOnHealthZeroSystem());
 
 
 			// TODO this is disgusting, FIX
@@ -67,6 +78,7 @@ namespace AMDD
 			entity.AddComponent<Player>();
 			entity.AddComponent<FacingDirection>();
 			entity.AddComponent(new Sprite() { image = _defaultPlayerTexture}); entity.AddComponent<Input>(); entity.AddComponent(new Physics() { dragScale=2f, xDragScale=4f });
+			entity.AddComponent(new Shooting() { bulletPool = new ObjectPooling.ObjectPool(new ObjectPooling.BulletConstructor(), 20) });
 			entity.AddComponent(new Gravity() { gravityScale = 5f }); entity.AddComponent(new Collider() { collider = new Rectangle(0, 0, 14, 31), offset = new Vector2(3, 0), continuous = true });
 			entity.AddComponent(new Animated() { tree = GetPlayerTree.ConstructPlayerTree(Content) });
 			entity.AddComponent<Grounded>();
@@ -82,6 +94,7 @@ namespace AMDD
 			wall.GetComponent<Position>().position = new Vector2(70, 80);
 			wall.AddComponent(new Sprite() { image = Content.Load<Texture2D>("Sprites/Tiles/backgrounds/artaria_first_background") });
 			wall.AddComponent<Static>(); wall.AddComponent(new Collider() { collider = new Rectangle(0, 120, 400, 100) });
+			wall.AddComponent<Health>(); wall.AddComponent<DamageBuffer>();
 			_scene.entityMap.AddNewEntity(wall);
 		}
 

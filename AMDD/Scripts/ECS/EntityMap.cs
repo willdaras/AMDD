@@ -2,6 +2,7 @@ using AMDD.ECS.Components;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AMDD.ECS;
 
@@ -23,6 +24,18 @@ public class EntityMap : IEnumerable<Entity>
 		Entity instantiationBuffer = new ManagerEntity();
 		this.instantiationBuffer = instantiationBuffer.AddComponent<InstantiationBuffer>();
 		AddNewEntity(instantiationBuffer);
+	}
+
+	public EntityMap(IEnumerable<Entity> entities)
+	{
+		Entity instantiationBuffer = new ManagerEntity();
+		this.instantiationBuffer = instantiationBuffer.AddComponent<InstantiationBuffer>();
+		AddNewEntity(instantiationBuffer);
+
+		foreach (Entity entity in entities)
+		{
+			AddNewEntity(entity);
+		}
 	}
 
 	/// <summary>
@@ -111,7 +124,7 @@ public class EntityMap : IEnumerable<Entity>
 	#region Enumerator
 	public IEnumerator<Entity> GetEnumerator()
 	{
-		return _entities.GetEnumerator();
+		return _entities.Where((t) => t is not ManagerEntity).GetEnumerator();
 	}
 	IEnumerator IEnumerable.GetEnumerator()
 	{

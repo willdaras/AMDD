@@ -8,16 +8,18 @@ public class KeyboardInputManager : IInputProvider
 	private bool _shootingLastFrame;
 	public InputState GetInputState(InputState inputState = new InputState())
 	{
-		inputState.movementDir = GetDir();
-		inputState.jumping = Keyboard.GetState().IsKeyDown(Keys.Z);
-		inputState.shooting = Shooting();
-		inputState.aimDir = AimDir();
+		KeyboardState state = Keyboard.GetState();
+		inputState.movementDir = MoveDir(state);
+		inputState.jumping = state.IsKeyDown(Keys.Z);
+		inputState.shooting = Shooting(state);
+		inputState.aimDir = AimDir(state);
+		inputState.aiming = state.IsKeyDown(Keys.LeftShift);
 		return inputState;
 	}
 	
-	private bool Shooting()
+	private bool Shooting(KeyboardState state)
 	{
-		bool shooting = Keyboard.GetState().IsKeyDown(Keys.X);
+		bool shooting = state.IsKeyDown(Keys.X);
 		if (shooting)
 		{
 			if (!_shootingLastFrame)
@@ -30,17 +32,20 @@ public class KeyboardInputManager : IInputProvider
 		return false;
 	}
 
-	public Vector2 AimDir()
+	public Vector2 MoveDir(KeyboardState state)
 	{
-		Vector2 dir = GetDir();
-		KeyboardState state = Keyboard.GetState();
+		if (state.IsKeyDown(Keys.Space)) return Vector2.Zero;
+		return GetDir(state);
+	}
+	public Vector2 AimDir(KeyboardState state)
+	{
+		Vector2 dir = GetDir(state);
 		return dir;
 	}
 
-	private Vector2 GetDir()
+	private Vector2 GetDir(KeyboardState state)
 	{
 		Vector2 moveDir = new Vector2(0, 0);
-		KeyboardState state = Keyboard.GetState();
 		moveDir.X += state.IsKeyDown(Keys.Right) ? 1 : 0;
 		moveDir.X += state.IsKeyDown(Keys.Left) ? -1 : 0;
 		moveDir.Y += state.IsKeyDown(Keys.Up) ? -1 : 0;

@@ -13,9 +13,9 @@ public abstract class TerminationNode : Node
 	}
 
 	/// <summary>
-	/// Resolves the animation and returns the current sprite.
+	/// Resolves the animation and returns the current Animation Frame.
 	/// </summary>
 	/// <param name="state"> The current state of the animator. </param>
-	/// <returns> The current sprite as a Texture2D. </returns>
-	public abstract Texture2D ResolveAnimation(IAnimatorState state);
+	/// <returns> The current animation frame. </returns>
+	public abstract Animator.IAnimationFrame ResolveAnimation(IAnimatorState state);
 }

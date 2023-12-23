@@ -8,4 +8,5 @@ public class Input : Component
 	public bool jumping;
 	public bool shooting;
 	public Vector2 aimDir;
+	public bool aiming;
 }

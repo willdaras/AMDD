@@ -1,4 +1,5 @@
 using AMDD.ECS.Components;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Diagnostics;
 
@@ -25,7 +26,10 @@ public class AnimationSystem : System
 		foreach (Entity entity in entities.GetEntitiesWithComponents(RequiredComponents))
 		{
 			Animated animator = entity.GetComponent<Animated>();
-			entity.GetComponent<Sprite>().image = animator.tree.ResolveAnimation(animator.tree.currentState);
+			Sprite sprite = entity.GetComponent<Sprite>();
+			Animation.Animator.IAnimationFrame frame = animator.tree.ResolveAnimation(animator.tree.currentState);
+			sprite.image = frame.GetImage();
+			sprite.offset = frame.offset;
 		}
 	}
 }

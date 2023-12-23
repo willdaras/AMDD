@@ -16,7 +16,7 @@ public class DirectionalAnimationNode : TerminationNode
 		_animationR = animationR;
 	}
 
-	public override Texture2D ResolveAnimation(IAnimatorState state)
+	public override Animator.IAnimationFrame ResolveAnimation(IAnimatorState state)
 	{
 		if (state.GetBool("facingRight"))
 		{

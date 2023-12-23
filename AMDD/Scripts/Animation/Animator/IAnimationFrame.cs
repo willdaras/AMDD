@@ -1,3 +1,4 @@
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace AMDD.Animation.Animator;
@@ -11,5 +12,7 @@ public interface IAnimationFrame
 	/// Get the frame that should be displayed.
 	/// </summary>
 	/// <returns> The frame to display. </returns>
-	public abstract Texture2D GetImage();
+	public Texture2D GetImage();
+
+	public Vector2 offset { get; }
 }

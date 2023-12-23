@@ -17,7 +17,7 @@ public class DrawSystem : System
 		{
 			Sprite sprite = entity.GetComponent<Sprite>();
 			Position position = entity.GetComponent<Position>();
-			Vector2 pos = position.position;
+			Vector2 pos = position.position + sprite.offset;
 			pos.Floor();
 			spriteBatch.Draw(sprite.image, pos, Color.White);
 		}

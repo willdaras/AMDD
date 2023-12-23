@@ -142,7 +142,7 @@ namespace AMDD.ECS.Systems
 				if (otherCollider.collisionLayer != collider.collisionLayer) { continue; }
 				if (collider.collider.Intersects(otherCollider.collider))
 				{
-					HandleCollisionResponse(entity, position, collider, otherCollider, physics, axisVelocity, isXAxis);
+					HandleCollisionResponse(entity, position, collider, otherEntity, physics, axisVelocity, isXAxis);
 					return true; // No need to continue checking other colliders once collision is detected
 				}
 			}
@@ -159,14 +159,14 @@ namespace AMDD.ECS.Systems
 			return false;
 		}
 
-		private void HandleCollisionResponse(Entity entity, Position position, Collider collider, Collider otherCollider, Physics physics, float axisVelocity, bool isXAxis)
+		private void HandleCollisionResponse(Entity entity, Position position, Collider collider, Entity otherCollider, Physics physics, float axisVelocity, bool isXAxis)
 		{
 			position.position = new Vector2(isXAxis ? ((MathF.Sign(axisVelocity) > 0) ? MathF.Floor(collider.lastValidPos.X) : MathF.Ceiling(collider.lastValidPos.X)) : position.position.X,
 				isXAxis ? position.position.Y : ((MathF.Sign(axisVelocity) > 0) ? MathF.Floor(collider.lastValidPos.Y) : MathF.Ceiling(collider.lastValidPos.Y)));
 
 			physics.velocity = isXAxis ? new Vector2(0, physics.velocity.Y) : new Vector2(physics.velocity.X, 0);
 
-			collider.collidingWith.value = entity;
+			collider.collidingWith.value = otherCollider;
 			collider.collidingWith.enabled = true;
 		}
 

@@ -1,13 +1,16 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
+using System.Text.Json.Serialization;
 
 namespace AMDD.ECS;
 
 /// <summary>
 /// An entity, a container for components.
 /// </summary>
+[JsonPolymorphic(TypeDiscriminatorPropertyName = "$entity")]
+[JsonDerivedType(typeof(SceneEntity), typeDiscriminator: "scene")]
+[JsonDerivedType(typeof(ManagerEntity), typeDiscriminator: "manager")]
 public abstract class Entity
 {
 	/// <summary>

@@ -19,7 +19,7 @@ public class BulletConstructor : IObjectConstructor
 		entity.AddComponent(new Sprite() { image = _sprite });
 		entity.AddComponent(new Physics() { dragScale = 0 });
 		entity.AddComponent(new Collider() { collider = new Rectangle(0, 0, 2, 2) });
-		entity.AddComponent(new Bullet());
+		entity.AddComponent(new Bullet() { damage = 2 });
 		return entity;
 	}
 }

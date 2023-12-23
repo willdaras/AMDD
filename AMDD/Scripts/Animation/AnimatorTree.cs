@@ -16,7 +16,7 @@ public class AnimatorTree : TerminationNode
 		currentState = new AnimatorState(new System.Collections.Generic.Dictionary<string, int>());
 	}
 
-	public override Texture2D ResolveAnimation(IAnimatorState state)
+	public override Animator.IAnimationFrame ResolveAnimation(IAnimatorState state)
 	{
 		TerminationNode node = treeRoot.Resolve(state);
 

@@ -14,7 +14,7 @@ public class BasicAnimationNode : TerminationNode
 		_animation = animation;
 	}
 
-	public override Texture2D ResolveAnimation(IAnimatorState state)
+	public override Animator.IAnimationFrame ResolveAnimation(IAnimatorState state)
 	{
 		return _animation.GetFrame(state);
 	}

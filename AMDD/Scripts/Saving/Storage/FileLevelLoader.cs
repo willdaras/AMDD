@@ -1,0 +1,35 @@
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using System.IO;
+
+namespace AMDD.SaveSystem.Storage;
+
+public class FileLevelLoader : ILevelLoader
+{
+	private ContentManager _contentManager;
+
+	public FileLevelLoader(ContentManager contentManager)
+	{
+		_contentManager = contentManager;
+	}
+
+	public string Load(string levelName)
+	{
+		string text;
+		var filePath = Path.Combine(_contentManager.RootDirectory, "Levels/", levelName, ".json");
+		using (var stream = TitleContainer.OpenStream(filePath))
+		{
+			using (var reader = new StreamReader(stream))
+			{
+				text = reader.ReadToEnd();
+			}
+		}
+		return text;
+	}
+
+	public void Save(string levelName, string data)
+	{
+		var filePath = Path.Combine(_contentManager.RootDirectory, "Levels/", levelName, ".json");
+		File.WriteAllText(filePath, data);
+	}
+}
