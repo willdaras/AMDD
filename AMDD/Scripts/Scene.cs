@@ -27,6 +27,7 @@ public class Scene
 	/// The scene's physics system.
 	/// </summary>
 	public ECS.System physicsSystem = new PhysicsSystem();
+	public List<ECS.System> preDrawSystems = new List<ECS.System>();
 	/// <summary>
 	/// The scene's draw system.
 	/// </summary>
@@ -68,6 +69,7 @@ public class Scene
 	public void Draw(GameTime gameTime)
 	{
 		double deltaTime = gameTime.ElapsedGameTime.TotalSeconds;
+
 		drawSystem.Update(entityMap, (float)deltaTime);
 	}
 
@@ -82,5 +84,9 @@ public class Scene
 			system.Update(entityMap, (float)deltaTime);
 		}
 		physicsSystem.Update(entityMap, (float)deltaTime);
+		foreach (ECS.System system in preDrawSystems)
+		{
+			system.Update(entityMap, (float)deltaTime);
+		}
 	}
 }

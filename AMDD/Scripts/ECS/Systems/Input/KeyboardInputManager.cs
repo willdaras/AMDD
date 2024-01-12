@@ -13,7 +13,7 @@ public class KeyboardInputManager : IInputProvider
 		inputState.jumping = state.IsKeyDown(Keys.Z);
 		inputState.shooting = Shooting(state);
 		inputState.aimDir = AimDir(state);
-		inputState.aiming = state.IsKeyDown(Keys.LeftShift);
+		inputState.aiming = state.IsKeyDown(Keys.Space);
 		return inputState;
 	}
 	

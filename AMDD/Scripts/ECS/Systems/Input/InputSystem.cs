@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using AMDD.ECS.Systems.Input;
 using System;
+using System.Diagnostics;
 
 namespace AMDD.ECS.Systems;
 

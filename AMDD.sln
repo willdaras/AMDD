@@ -5,7 +5,7 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AMDD", "AMDD\AMDD.csproj", "{48D279D3-855F-4E86-B7F6-071F6DF4C88A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMDDTesting", "AMDDTesting\AMDDTesting.csproj", "{C44D547E-5D72-4D6F-A4A3-940D83DEEC56}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AMDDTesting", "AMDDTesting\AMDDTesting.csproj", "{C44D547E-5D72-4D6F-A4A3-940D83DEEC56}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

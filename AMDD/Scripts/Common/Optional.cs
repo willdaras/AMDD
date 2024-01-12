@@ -7,7 +7,7 @@ public struct Optional<T>
 
 	public Optional(T initialValue)
 	{
-		this.value = initialValue;
+		value = initialValue;
 		enabled = true;
 	}
 }

@@ -2,13 +2,10 @@
 using AMDD.ECS;
 using AMDD.ECS.Components;
 using AMDD.ECS.Systems;
+using AMDD.Rendering;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.IO;
 
 namespace AMDD
 {
@@ -69,7 +66,11 @@ namespace AMDD
 			_scene.systems.Add(new AnimationSystem());
 			_scene.systems.Add(new HealthSystem());
 			_scene.systems.Add(new DestroyOnHealthZeroSystem());
+			_scene.preDrawSystems.Add(new CamFollowPlayerSystem());
 
+			Rendering.Camera camera = new BasicCamera(240, 160);
+			camera.SetActive();
+			_scene.entityMap.AddNewEntity(camera);
 
 			// TODO this is disgusting, FIX
 			Entity entity = new SceneEntity();
