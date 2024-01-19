@@ -16,10 +16,6 @@ public class LevelEditorSceneConstructor : Scene
 		scene.systems.Add(new Systems.SaveSceneSystem());
 		scene.entityMap.AddNewEntity(new PlayerConstructor().ConstructObject());
 
-		Entity entity = new ManagerEntity();
-		entity.AddComponent(new Components.LevelPainter() { currentTexture = GameData.contentManager.Load<Texture2D>("Sprites/Tiles/basic_ground_tiles/basic_ground_tile1") });
-		scene.entityMap.AddNewEntity(entity);
-
 		return scene;
 	}
 }

@@ -20,9 +20,10 @@ public class Sprite : Component
 	public enum Layer
 	{
 		Default = 0,
-		Background = 1,
-		Sprites = 2,
-		Foreground = 4,
-		UI = 8,
+		BackgroundParalax = 1,
+		Background = 2,
+		Sprites = 4,
+		Foreground = 8,
+		UI = 16,
 	}
 }

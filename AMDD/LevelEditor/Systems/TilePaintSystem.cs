@@ -8,6 +8,7 @@ using AMDD.LevelEditor.Tiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace AMDD.LevelEditor.Systems;
 
@@ -20,6 +21,7 @@ public class TilePaintSystem : ECS.System
 		{ 1, new Dictionary<Vector2, Entity>() },
 		{ 2, new Dictionary<Vector2, Entity>() },
 		{ 4, new Dictionary<Vector2, Entity>() },
+		{ 8, new Dictionary<Vector2, Entity>() }
 	};
 
 	private Components.LevelPainter _levelPainter;
@@ -43,6 +45,10 @@ public class TilePaintSystem : ECS.System
 	{
 		if (_levelPainter == null)
 		{
+			Entity painter = new ManagerEntity();
+			painter.AddComponent(new Components.LevelPainter() { currentTexture = GameData.contentManager.Load<Texture2D>("Sprites/Tiles/basic_ground_tiles/basic_ground_tile1") });
+			entities.AddNewEntity(painter);
+
 			_levelPainter = entities.GetEntitiesWithComponents(typeof(Components.LevelPainter))[0].GetComponent<Components.LevelPainter>();
 			SceneEntity entity = new SceneEntity();
 			_cursorTexture = GameData.contentManager.Load<Texture2D>("Sprites/Engine/LevelEditor/Cursor");
@@ -55,6 +61,15 @@ public class TilePaintSystem : ECS.System
 			_layerDisplay.AddComponent(new UIText() { text = ((Sprite.Layer)_layer).ToString() });
 			_layerDisplay.position.position = new Vector2(0, 10);
 			entities.AddNewEntity(_layerDisplay);
+
+			foreach (Entity tile in entities)
+			{
+				if (!tile.TryGetComponent(out Name name))
+					continue;
+				if (name.name != "ColliderTile" && name.name != "Tile")
+					continue;
+				_positions[(int)tile.GetComponent<Sprite>().layer].Add(tile.GetComponent<Position>().position, tile);
+			}
 		}
 
 		MouseState state = Mouse.GetState();
@@ -105,7 +120,7 @@ public class TilePaintSystem : ECS.System
 		{
 			_layerKeyDown = false;
 			_layer *= 2;
-			if (_layer >= 8)
+			if (_layer >= 16)
 			{
 				_layer = 1;
 			}

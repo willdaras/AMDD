@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using AMDD.Rendering;
 using AMDD.ECS.Components.UI;
+using System.Diagnostics;
 
 namespace AMDD.ECS.Systems;
 

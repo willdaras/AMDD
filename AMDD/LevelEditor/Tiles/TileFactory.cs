@@ -11,6 +11,7 @@ public class TileFactory : ITileFactory
 	{
 		SceneEntity entity = new SceneEntity();
 		entity.position.position = position;
+		entity.name.name = "Tile";
 		entity.AddComponent(new Sprite(texture) { layer = (Sprite.Layer)layer, address = texAddress });
 		return entity;
 	}

@@ -10,6 +10,7 @@ namespace AMDD.Rendering;
 [JsonDerivedType(typeof(Rendering.BasicCameraStack), typeDiscriminator: "camerastack")]
 [JsonDerivedType(typeof(Rendering.BasicLayerCamera), typeDiscriminator: "layercamera")]
 [JsonDerivedType(typeof(Rendering.UICamera), typeDiscriminator: "uicamera")]
+[JsonDerivedType(typeof(Rendering.ParalaxCamera), typeDiscriminator: "paralaxcamera")]
 public abstract class Camera : SceneEntity
 {
 	public static Camera activeCamera { get; private set; }

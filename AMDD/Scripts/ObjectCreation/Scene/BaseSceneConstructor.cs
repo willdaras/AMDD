@@ -25,6 +25,10 @@ public class BaseSceneConstructor : ISceneConstructor
 		{
 			stack = new List<Camera>() 
 			{
+				new ParalaxCamera(GameData.screenX, GameData.screenY)
+				{
+					renderLayers = ECS.Components.Sprite.Layer.BackgroundParalax
+				},
 				new BasicLayerCamera(GameData.screenX, GameData.screenY)
 				{
 					renderLayers = ECS.Components.Sprite.Layer.Background

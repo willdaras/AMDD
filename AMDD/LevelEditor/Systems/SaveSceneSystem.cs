@@ -8,6 +8,7 @@ using AMDD.SaveSystem.Storage;
 using System.Net.Http.Headers;
 using System.Diagnostics;
 using AMDD.Rendering;
+using AMDD.ECS.Components.UI;
 
 namespace AMDD.LevelEditor.Systems;
 
@@ -58,7 +59,8 @@ public class SaveSceneSystem : ECS.System
 		Debug.WriteLine("Loading Level");
 		EntityMap loaded = _saveInterpreter.Interpret("test_editor_level");
 		loaded = SaveProcessor.ProcessSaveForDeserialization(loaded);
-		Scene loadedScene = new ObjectCreation.Scenes.GameSceneConstructor().ConstructScene();
+		bool editor = Keyboard.GetState().IsKeyDown(Keys.D8);
+		Scene loadedScene = editor ? new LevelEditorSceneConstructor().ConstructScene() : new ObjectCreation.Scenes.GameSceneConstructor().ConstructScene();
 		loadedScene.entityMap = loaded;
 		loadedScene.entityMap.AddNewEntity(new ObjectCreation.PlayerConstructor().ConstructObject());
 		foreach (Entity entity in loadedScene.entityMap)

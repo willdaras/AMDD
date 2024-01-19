@@ -8,22 +8,19 @@ using System.Diagnostics;
 
 namespace AMDD.Rendering;
 
-public class BasicLayerCamera : Camera
+public class ParalaxCamera : BasicLayerCamera
 {
-	public ECS.Components.Camera camera => GetComponent<ECS.Components.Camera>();
+	private float _scaleX = 0.5f;
+	private float _scaleY = 0.9f;
 
-	public override Rectangle bounds => new Rectangle((int)MathF.Round(position.position.X - (camera.size / 2).X), (int)MathF.Round(position.position.Y - (camera.size / 2).Y), camera.width, camera.height);
-
-	public Sprite.Layer renderLayers = Sprite.Layer.Default;
-
-	public BasicLayerCamera(Vector2 size)
+	public ParalaxCamera(Vector2 size)
 	{
 		ECS.Components.Camera camera = new ECS.Components.Camera();
 		camera.width = (int)size.X;
 		camera.height = (int)size.Y;
 		AddComponent(camera);
 	}
-	public BasicLayerCamera(int width, int height)
+	public ParalaxCamera(int width, int height)
 	{
 		ECS.Components.Camera camera = new ECS.Components.Camera();
 		camera.width = width;
@@ -31,17 +28,9 @@ public class BasicLayerCamera : Camera
 		AddComponent(camera);
 	}
 
-	public BasicLayerCamera() { }
+	public ParalaxCamera() { }
 
-	public override void Draw(SpriteBatch spriteBatch, List<Entity> entitiesToDraw)
-	{
-		foreach (Entity entity in entitiesToDraw)
-		{
-			DrawEntity(entity, spriteBatch);
-		}
-	}
-
-	protected virtual void DrawEntity(Entity entity, SpriteBatch spriteBatch)
+	protected override void DrawEntity(Entity entity, SpriteBatch spriteBatch)
 	{
 		Sprite sprite = entity.GetComponent<Sprite>();
 		if ((sprite.layer & renderLayers) == 0)
@@ -49,6 +38,8 @@ public class BasicLayerCamera : Camera
 			//Debug.WriteLine($"sprite not within layers {(int)sprite.layers}, {renderLayers}");
 			return;
 		}
+		//this.position.position.X *= _scaleX;
+		//this.position.position.Y *= _scaleY;
 		Position position = entity.GetComponent<Position>();
 		Vector2 pos = position.position + sprite.offset;
 		//pos.Floor();
@@ -56,6 +47,8 @@ public class BasicLayerCamera : Camera
 		if (!bounds.Intersects(imageBounds))
 			return;
 		pos -= this.position.position - (camera.size / 2);
+		pos.X *= _scaleX;
+		pos.Y *= _scaleY;
 		spriteBatch.Draw(sprite.image, pos, sprite.color);
 	}
 }

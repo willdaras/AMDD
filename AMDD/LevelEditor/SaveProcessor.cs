@@ -14,6 +14,7 @@ public class SaveProcessor
 	public static EntityMap ProcessSaveForSerialization(EntityMap entities)
 	{
 		List<Entity> entitiesList = entities.ToList();
+		List<Entity> finalList = new List<Entity>(entitiesList);
 		for (int i = 0; i < entitiesList.Count; i++)
 		{
 			if (entitiesList[i].TryGetComponent(out Player player))
@@ -22,34 +23,45 @@ public class SaveProcessor
 				newPlayer.position.position = entitiesList[i].GetComponent<Position>().position;
 				newPlayer.AddComponent(new Player());
 				entitiesList[i] = newPlayer;*/
-				entitiesList.RemoveAt(i);
+				finalList.Remove(entitiesList[i]);
+				continue;
 			}
 			if (entitiesList[i].HasComponent<UIText>())
 			{
-				entitiesList.RemoveAt(i);
+				finalList.Remove(entitiesList[i]);
+				continue;
 			}
 			if (entitiesList[i].HasComponent<LevelPainter>())
 			{
-				entitiesList.RemoveAt(i);
+				finalList.Remove(entitiesList[i]);
+				continue;
 			}
 		}
-		entities = new EntityMap(entitiesList);
+		entities = new EntityMap(finalList);
 		return entities;
 	}
 	public static EntityMap ProcessSaveForDeserialization(EntityMap entities)
 	{
 		List<Entity> entitiesList = entities.ToList();
+		List<Entity> finalList = new List<Entity>(entitiesList);
 		for (int i = 0; i < entitiesList.Count; i++)
 		{
-			if (entitiesList[i].TryGetComponent(out LevelPainter levelPainter))
+			if (entitiesList[i].HasComponent<LevelPainter>())
 			{
-				entitiesList.RemoveAt(i);
+				finalList.Remove(entitiesList[i]);
+				continue;
+			}
+			if (entitiesList[i].HasComponent<UIText>())
+			{
+				finalList.Remove(entitiesList[i]);
+				continue;
 			}
 			if (entitiesList[i].TryGetComponent(out Name name))
 			{
 				if (name.name == "Cursor")
 				{
-					entitiesList.RemoveAt(i);
+					finalList.Remove(entitiesList[i]);
+					continue;
 				}
 			}
 			if (entitiesList[i].TryGetComponent(out Sprite sprite))
@@ -63,7 +75,7 @@ public class SaveProcessor
 				entitiesList[i] = newPlayer;
 			}*/
 		}
-		entities = new EntityMap(entitiesList);
+		entities = new EntityMap(finalList);
 		return entities;
 	}
 }

@@ -1355,6 +1355,18 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Player/spinjumpslow/player_spinjump8.png
 
+#begin Sprites/Tiles/backgrounds/artaria_first_background.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Tiles/backgrounds/artaria_first_background.png
+
 #begin Sprites/Tiles/basic_ground_tiles/basic_ground_tile1.png
 /importer:TextureImporter
 /processor:TextureProcessor

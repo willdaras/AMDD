@@ -51,7 +51,7 @@ namespace AMDD
 
 			//_scene = new ObjectCreation.Scenes.BaseSceneConstructor().ConstructScene();
 			//_scene.preDrawSystems.Add(new CamFollowPlayerSystem());
-			_scene = new LevelEditor.LevelEditorSceneConstructor().ConstructScene();
+			Scene scene = new LevelEditor.LevelEditorSceneConstructor().ConstructScene();
 
 
 			// TODO: use this.Content to load your game content here
@@ -88,9 +88,9 @@ namespace AMDD
 			ground.GetComponent<Position>().position = new Vector2(0, 64);
 			//ground.AddComponent(new Sprite() { image = Content.Load<Texture2D>("Sprites/Tiles/backgrounds/artaria_first_background"), layer = Sprite.Layer.Sprites, address = "Sprites/Tiles/backgrounds/artaria_first_background" });
 			ground.AddComponent<Static>(); ground.AddComponent(new Collider() { collider = new Rectangle(0, 120, 400, 100) });
-			_scene.entityMap.AddNewEntity(ground);
+			scene.entityMap.AddNewEntity(ground);
 
-			Scene.SetActiveScene(_scene);
+			Scene.SetActiveScene(scene);
 		}
 
 		protected override void Update(GameTime gameTime)
