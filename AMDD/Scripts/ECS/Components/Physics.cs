@@ -4,10 +4,10 @@ namespace AMDD.ECS.Components;
 
 public class Physics : Component
 {
-	public Vector2 velocity = Vector2.Zero;
-	public Vector2 acceleration = Vector2.Zero;
-	public float dragScale = 1;
-	public float xDragScale = 1;
-	public float yDragScale = 1;
-	public float mass = 1;
+	public Vector2 velocity { get; set; } = Vector2.Zero;
+	public Vector2 acceleration { get; set; } = Vector2.Zero;
+	public float dragScale { get; set; } = 1;
+	public float xDragScale { get; set; } = 1;
+	public float yDragScale { get; set; } = 1;
+	public float mass { get; set; } = 1;
 }

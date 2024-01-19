@@ -7,7 +7,7 @@ namespace AMDD.ECS.Components;
 /// </summary>
 public class InstantiationBuffer : Component
 {
-	public List<SceneEntity> entitiesToInstantiate = new List<SceneEntity>();
+	public List<SceneEntity> entitiesToInstantiate { get; set; } = new List<SceneEntity>();
 
-	public List<SceneEntity> entitiesToDestroy = new List<SceneEntity>();
+	public List<SceneEntity> entitiesToDestroy { get; set; } = new List<SceneEntity>();
 }

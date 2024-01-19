@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using AMDD.ECS.Components;
 using System.Diagnostics;
-using AMDD.ObjectPooling;
+using AMDD.ObjectCreation;
 
 namespace AMDD.ECS.Systems;
 
@@ -54,7 +54,7 @@ public class PlayerControllerSystem : System
 
 		if (input.moveDir.X == 0)
 		{
-			physics.velocity.X += MathHelper.Clamp(-MathF.Sign(physics.velocity.X) * dragScale, -MathF.Abs(physics.velocity.X), MathF.Abs(physics.velocity.X));
+			physics.velocity = new Vector2(physics.velocity.X + MathHelper.Clamp(-MathF.Sign(physics.velocity.X) * dragScale, -MathF.Abs(physics.velocity.X), MathF.Abs(physics.velocity.X)), physics.velocity.Y);
 		}
 	}
 	private void Jump(Entity player, float deltatime, Components.Input input, Physics physics, Grounded grounded)

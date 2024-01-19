@@ -2,5 +2,5 @@ namespace AMDD.ECS.Components;
 
 public class Bullet : Component
 {
-	public int damage = 1;
+	public int damage { get; set; } = 1;
 }

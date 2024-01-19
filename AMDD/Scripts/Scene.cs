@@ -14,6 +14,8 @@ namespace AMDD;
 /// </summary>
 public class Scene
 {
+	public static Scene activeScene { get; private set; } = new Scene();
+
 	/// <summary>
 	/// The scene's entitymap, keeps track of entities and archetypes.
 	/// </summary>
@@ -37,7 +39,7 @@ public class Scene
 	/// Triggered when the scene is loaded, used for initialization.
 	/// </summary>
 	/// <remarks> TODO - this doesn't get triggered yet. </remarks>
-	public void OnEnable()
+	public void Enable()
 	{
 		Entity.OnComponentRemoved += entityMap.ComponentRemoved;
 		Entity.OnComponentAdded += entityMap.ComponentAdded;
@@ -46,10 +48,17 @@ public class Scene
 	/// Triggered when the scene is unload, used for deinitialization.
 	/// </summary>
 	/// <remarks> TODO - this doesn't get triggered yet. </remarks>
-	public void OnDisable()
+	public void Disable()
 	{
 		Entity.OnComponentRemoved -= entityMap.ComponentRemoved;
 		Entity.OnComponentAdded -= entityMap.ComponentAdded;
+	}
+
+	public static void SetActiveScene(Scene scene)
+	{
+		activeScene.Disable();
+		activeScene = scene;
+		activeScene.Enable();
 	}
 
 	/// <summary>

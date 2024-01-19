@@ -2,7 +2,7 @@ namespace AMDD.ECS.Components;
 
 public class Shooting : Component
 {
-	public ObjectPooling.ObjectPool bulletPool;
+	public ObjectCreation.ObjectPool bulletPool;
 
 	public bool shooting => shootFrameCount <= shootFrames;
 	public int shootFrames => 15;

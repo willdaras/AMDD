@@ -3,23 +3,23 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using AMDD.ECS;
 using AMDD.ECS.Components;
+using System.Text.Json.Serialization;
 
 namespace AMDD;
 
 public class SceneEntity : Entity
 {
-	public Position position;
-	public Name name;
+	public Position position => GetComponent<Position>();
+	public Name name => GetComponent<Name>();
 
 	public SceneEntity()
 	{
-		position = AddComponent<Position>();
-		name = AddComponent<Name>();
+		AddComponent<Position>();
+		AddComponent<Name>();
 	}
 	public SceneEntity(Vector2 position)
 	{
-		this.position = new Position(position);
-		AddComponent(this.position);
-		name = AddComponent<Name>();
+		AddComponent(new Position(position));
+		AddComponent<Name>();
 	}
 }

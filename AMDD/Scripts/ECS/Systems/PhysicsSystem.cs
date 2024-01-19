@@ -17,13 +17,29 @@ namespace AMDD.ECS.Systems
 
 		public override void Update(EntityMap entities, float deltaTime)
 		{
-			List<Entity> colliders = entities.GetEntitiesWithComponents(typeof(Collider));
-
-			MoveColliders(colliders);
+			List<Entity> allColliders = entities.GetEntitiesWithComponents(typeof(Collider));
+			MoveColliders(allColliders);
+			List<Entity> colliders = new List<Entity>();
+			foreach (Entity entity in allColliders)
+			{
+				Collider collider = entity.GetComponent<Collider>();
+				bool isStatic = entity.HasComponent<Static>();
+				Rectangle bounds = collider.collider;
+				if (Rendering.Camera.WithinCamera(bounds, isStatic ? 4 : 2))
+				{
+					colliders.Add(entity);
+				}
+				//colliders.Add(entity);
+			}
 
 			foreach (Entity entity in entities.GetEntitiesWithComponents(RequiredComponents))
 			{
-				if (entity.HasComponent<Static>()) { continue; }
+				if (entity.HasComponent<Static>())
+					continue;
+				Rectangle bounds = entity.GetComponent<Collider>().collider;
+
+				if (!Rendering.Camera.WithinCamera(bounds, 2))
+					continue;
 				UpdateEntityPhysics(entity, colliders, deltaTime);
 			}
 		}
@@ -150,11 +166,11 @@ namespace AMDD.ECS.Systems
 			// No collision, update the last valid position
 			if (isXAxis)
 			{
-				collider.lastValidPos.X = position.position.X;
+				collider.lastValidPos = new Vector2(position.position.X, collider.lastValidPos.Y);
 			}
 			else
 			{
-				collider.lastValidPos.Y = position.position.Y;
+				collider.lastValidPos = new Vector2(collider.lastValidPos.X, position.position.Y);
 			}
 			return false;
 		}

@@ -16,7 +16,7 @@ public class FileLevelLoader : ILevelLoader
 	public string Load(string levelName)
 	{
 		string text;
-		var filePath = Path.Combine(_contentManager.RootDirectory, "Levels/", levelName, ".json");
+		var filePath = Path.Combine(_contentManager.RootDirectory, "Levels/", levelName + ".json");
 		using (var stream = TitleContainer.OpenStream(filePath))
 		{
 			using (var reader = new StreamReader(stream))
@@ -29,7 +29,7 @@ public class FileLevelLoader : ILevelLoader
 
 	public void Save(string levelName, string data)
 	{
-		var filePath = Path.Combine(_contentManager.RootDirectory, "Levels/", levelName, ".json");
+		var filePath = Path.Combine(_contentManager.RootDirectory, "Levels/", levelName + ".json");
 		File.WriteAllText(filePath, data);
 	}
 }

@@ -1,4 +1,4 @@
-namespace AMDD.ObjectPooling;
+namespace AMDD.ObjectCreation;
 
 public interface IObjectConstructor
 {

@@ -38,6 +38,16 @@ public class EntityMap : IEnumerable<Entity>
 		}
 	}
 
+	public void Reset(IEnumerable<Entity> entities)
+	{
+		_entities = new List<Entity>();
+		_entityLists = new Dictionary<Type, HashSet<Entity>>();
+		foreach (Entity entity in entities)
+		{
+			AddNewEntity(entity);
+		}
+	}
+
 	/// <summary>
 	/// Adds an entity to the map and sorts it according to its components.
 	/// </summary>

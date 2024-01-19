@@ -1,4 +1,5 @@
 using AMDD.ECS;
+using AMDD.SaveSystem.Serialization;
 using AMDD.SaveSystem.Storage;
 using System.Collections.Generic;
 using System.Text.Json;
@@ -17,7 +18,13 @@ public class SaveInterpreter : ISaveInterpreter
 	public EntityMap Interpret(string levelName)
 	{
 		string data = _levelLoader.Load(levelName);
-		IList<Entity> result = JsonSerializer.Deserialize<List<Entity>>(data);
+		var options = new JsonSerializerOptions
+		{
+			WriteIndented = true,
+			IncludeFields = true,
+			Converters = { new Vector2Converter() }
+		};
+		List<Entity> result = JsonSerializer.Deserialize<List<Entity>>(data, options);
 
 		EntityMap entities = new EntityMap(result);
 
@@ -28,7 +35,14 @@ public class SaveInterpreter : ISaveInterpreter
 	{
 		List<Entity> entities = new List<Entity>(map);
 
-		string data = JsonSerializer.Serialize(entities);
+		var options = new JsonSerializerOptions
+		{
+			WriteIndented = true,
+			IncludeFields = true,
+			Converters = { new Vector2Converter() }
+		};
+
+		string data = JsonSerializer.Serialize(entities, options);
 
 		_levelLoader.Save(levelName, data);
 

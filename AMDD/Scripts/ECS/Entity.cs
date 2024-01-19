@@ -11,12 +11,15 @@ namespace AMDD.ECS;
 [JsonPolymorphic(TypeDiscriminatorPropertyName = "$entity")]
 [JsonDerivedType(typeof(SceneEntity), typeDiscriminator: "scene")]
 [JsonDerivedType(typeof(ManagerEntity), typeDiscriminator: "manager")]
+[JsonDerivedType(typeof(Rendering.BasicCameraStack), typeDiscriminator: "camerastack")]
+[JsonDerivedType(typeof(Rendering.BasicLayerCamera), typeDiscriminator: "layercamera")]
+[JsonDerivedType(typeof(Rendering.UICamera), typeDiscriminator: "uicamera")]
 public abstract class Entity
 {
 	/// <summary>
 	/// The components in the entity.
 	/// </summary>
-	public List<Component> Components { get; private set;} = new List<Component>();
+	public List<Component> Components { get; set;} = new List<Component>();
 
 	/// <summary>
 	/// Called when a component is added to the entity.

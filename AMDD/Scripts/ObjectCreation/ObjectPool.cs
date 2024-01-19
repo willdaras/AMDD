@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 
-namespace AMDD.ObjectPooling;
+namespace AMDD.ObjectCreation;
 
 public class ObjectPool : IEnumerable<SceneEntity>
 {
