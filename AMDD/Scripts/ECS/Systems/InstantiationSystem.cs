@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace AMDD.ECS.Systems;
 
 /// <summary>
-/// A system to instantiate SceneEntities, instantiates all entities in the EntityMaps InstantiationBuffer.
+/// A system to instantiate SceneEntities, instantiates all entities in the EntityMap's InstantiationBuffer.
 /// </summary>
 public class InstantiationSystem : System
 {

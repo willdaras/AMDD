@@ -2,6 +2,9 @@ using Microsoft.Xna.Framework;
 
 namespace AMDD.ECS.Systems.Input;
 
+/// <summary>
+/// A state of input, storing input data.
+/// </summary>
 public struct InputState
 {
 	public Vector2 movementDir;

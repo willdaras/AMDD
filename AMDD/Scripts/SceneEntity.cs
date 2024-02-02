@@ -7,10 +7,13 @@ using System.Text.Json.Serialization;
 
 namespace AMDD;
 
+/// <summary>
+/// A default entity with a Position and Name.
+/// </summary>
 public class SceneEntity : Entity
 {
-	public Position position => GetComponent<Position>();
-	public Name name => GetComponent<Name>();
+	[JsonIgnore] public Position position => GetComponent<Position>();
+	[JsonIgnore] public Name name => GetComponent<Name>();
 
 	public SceneEntity()
 	{

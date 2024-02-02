@@ -6,8 +6,16 @@ using System.Collections.Generic;
 
 namespace AMDD.Animation;
 
+/// <summary>
+/// A constructor for the Player's AnimationTree.
+/// </summary>
 public static class GetPlayerTree
 {
+	/// <summary>
+	/// Constructs the player tree.
+	/// </summary>
+	/// <param name="contentManager"> The content manager to access files with. </param>
+	/// <returns> The constructed Player AnimationTree. </returns>
 	public static AnimatorTree ConstructPlayerTree(ContentManager contentManager)
 	{
 		PlayerTextures playerTextures = new PlayerTextures(contentManager);

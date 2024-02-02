@@ -4,6 +4,10 @@ using System.IO;
 
 namespace AMDD.SaveSystem.Storage;
 
+/// <summary>
+/// A basic LevelLoader that saves and loads to a JSON file.
+/// </summary>
+/// <remarks> Saves files to the Levels folder inside content. </remarks>
 public class FileLevelLoader : ILevelLoader
 {
 	private ContentManager _contentManager;

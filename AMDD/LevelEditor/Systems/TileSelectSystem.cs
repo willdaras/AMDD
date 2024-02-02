@@ -12,11 +12,17 @@ using System.Linq;
 
 namespace AMDD.LevelEditor.Systems;
 
+/// <summary>
+/// A System to select the tile to draw.
+/// </summary>
 public class TileSelectSystem : ECS.System
 {
 	public override Type[] RequiredComponents { get; }
 
 	private ContentManager _contentManager;
+	/// <summary>
+	/// The UI text to display the file address.
+	/// </summary>
 	public SceneEntity addressDisplay;
 
 	private List<DirectoryInfo> _directories;

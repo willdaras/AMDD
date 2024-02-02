@@ -5,16 +5,23 @@ using Microsoft.Xna.Framework.Graphics;
 using AMDD.ECS.Components;
 using AMDD.ECS;
 using AMDD.ECS.Components.UI;
+using System.Text.Json.Serialization;
 
 namespace AMDD.Rendering;
 
+/// <summary>
+/// A Camera to render UI, such as text.
+/// </summary>
 public class UICamera : Camera
 {
+	/// <summary>
+	/// The Camera component - stores data about the Camera.
+	/// </summary>
 	public ECS.Components.Camera camera;
 
-	public override Rectangle bounds => new Rectangle((int)MathF.Round(position.position.X - (camera.size / 2).X), (int)MathF.Round(position.position.Y - (camera.size / 2).Y), camera.width, camera.height);
+	[JsonIgnore] public override Rectangle bounds => new Rectangle((int)MathF.Round(position.position.X - (camera.size / 2).X), (int)MathF.Round(position.position.Y - (camera.size / 2).Y), camera.width, camera.height);
 
-	private SpriteFont _font;
+	[JsonIgnore] private SpriteFont _font;
 
 	public UICamera(Vector2 size)
 	{

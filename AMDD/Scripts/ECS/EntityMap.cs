@@ -38,6 +38,10 @@ public class EntityMap : IEnumerable<Entity>
 		}
 	}
 
+	/// <summary>
+	/// Resets the entitymap, a way to reuse the map with a new set of objects.
+	/// </summary>
+	/// <param name="entities"> The entities to sort after clearing. </param>
 	public void Reset(IEnumerable<Entity> entities)
 	{
 		_entities = new List<Entity>();

@@ -11,6 +11,9 @@ namespace AMDD.ECS.Systems
 	/// </summary>
 	public class PhysicsSystem : System
 	{
+		/// <summary>
+		/// The drag coefficient of the drag formula.
+		/// </summary>
 		public float DragCoefficient { get; set; } = 0.1f;
 
 		public override Type[] RequiredComponents { get; } = new Type[] { typeof(Position), typeof(Physics) };

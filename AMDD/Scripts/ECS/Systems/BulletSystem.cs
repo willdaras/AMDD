@@ -4,6 +4,9 @@ using System.Diagnostics;
 
 namespace AMDD.ECS.Systems;
 
+/// <summary>
+/// Handles bullet movement and damaging Entities hit by bullets.
+/// </summary>
 public class BulletSystem : System
 {
 	public override Type[] RequiredComponents { get; } = new Type[] { typeof(Bullet), typeof(Physics), typeof(Collider) };

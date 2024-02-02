@@ -4,6 +4,9 @@ using System.Diagnostics;
 
 namespace AMDD.ECS.Systems;
 
+/// <summary>
+/// Destroys objects with 0 or less health by adding them to the InstantiationBuffer destroy list.
+/// </summary>
 public class DestroyOnHealthZeroSystem : System
 {
 	public override Type[] RequiredComponents { get; } = new Type[] { typeof(Health) };

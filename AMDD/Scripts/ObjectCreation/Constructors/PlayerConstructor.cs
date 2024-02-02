@@ -6,6 +6,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace AMDD.ObjectCreation;
 
+/// <summary>
+/// Constructs the Player.
+/// </summary>
 public class PlayerConstructor : IObjectConstructor
 {
 	public SceneEntity ConstructObject()

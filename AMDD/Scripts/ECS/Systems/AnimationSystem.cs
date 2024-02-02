@@ -5,9 +5,15 @@ using System.Diagnostics;
 
 namespace AMDD.ECS.Systems;
 
+/// <summary>
+/// Animates all entities with the Animated Component - resolves their trees and sests their sprite.
+/// </summary>
 public class AnimationSystem : System
 {
 	private float _timer = 0;
+	/// <summary>
+	/// The rate to animate at in frames per second.
+	/// </summary>
 	public float fps = 12;
 	private float _interval => 1 / fps;
 

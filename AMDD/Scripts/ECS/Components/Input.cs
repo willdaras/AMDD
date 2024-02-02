@@ -2,6 +2,9 @@ using Microsoft.Xna.Framework;
 
 namespace AMDD.ECS.Components;
 
+/// <summary>
+/// Lets an entity read input.
+/// </summary>
 public class Input : Component
 {
 	public Vector2 moveDir { get; set; }

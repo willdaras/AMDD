@@ -6,6 +6,9 @@ using System.Text.Json;
 
 namespace AMDD.SaveSystem.Loading;
 
+/// <summary>
+/// A basic implementation of a SaveInterpreter that reads the EntityMap and saves and loads to JSON.
+/// </summary>
 public class SaveInterpreter : ISaveInterpreter
 {
 	private ILevelLoader _levelLoader;

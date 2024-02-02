@@ -4,6 +4,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace AMDD.ObjectCreation;
 
+/// <summary>
+/// Constructs a Bullet.
+/// </summary>
 public class BulletConstructor : IObjectConstructor
 {
 	private Texture2D _sprite;

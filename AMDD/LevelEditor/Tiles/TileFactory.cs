@@ -5,6 +5,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace AMDD.LevelEditor.Tiles;
 
+/// <summary>
+/// A basic tile factory that constructs textured tiles.
+/// </summary>
 public class TileFactory : ITileFactory
 {
 	public SceneEntity GetTile(Vector2 position, Texture2D texture, string texAddress, int layer = (int)Sprite.Layer.Sprites)

@@ -7,15 +7,33 @@ using AMDD.ObjectCreation;
 
 namespace AMDD.ECS.Systems;
 
+/// <summary>
+/// Handles player movement.
+/// </summary>
 public class PlayerControllerSystem : System
 {
+	/// <summary>
+	/// The player's speed.
+	/// </summary>
 	public float speed = 500;
+	/// <summary>
+	/// The scale of extra drag to apply to the player when not pressing a key - improves feel.
+	/// </summary>
 	public float dragScale = 3;
 
 	private bool _prevJumpValue = false;
 	private bool _jumpStarted = false;
+	/// <summary>
+	/// The initial force of the jump - for shorter jumps.
+	/// </summary>
 	public float initialJumpForce = 10000;
+	/// <summary>
+	/// The sustained force while holding jump - allows for variable jump height.
+	/// </summary>
 	public float jumpForce = 800;
+	/// <summary>
+	/// The maximum time the player can jump for.
+	/// </summary>
 	public float jumpTime = 0.2f;
 	private float _jumpTimer = 0;
 	private bool _jumping => _jumpTimer < jumpTime;

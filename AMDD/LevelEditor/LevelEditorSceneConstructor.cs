@@ -4,7 +4,10 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace AMDD.LevelEditor;
 
-public class LevelEditorSceneConstructor : Scene
+/// <summary>
+/// Constructs a Scene prepopulated with level editor Entities and Systems.
+/// </summary>
+public class LevelEditorSceneConstructor : ISceneConstructor
 {
 	public Scene ConstructScene()
 	{

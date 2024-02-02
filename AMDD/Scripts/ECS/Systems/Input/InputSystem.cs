@@ -6,9 +6,16 @@ using System.Diagnostics;
 
 namespace AMDD.ECS.Systems;
 
+/// <summary>
+/// A System to handle input and populate Input Components.
+/// </summary>
 public class InputSystem : System
 {
 	private IInputProvider _inputProvider = new KeyboardInputManager();
+	/// <summary>
+	/// The InputProvider being used. Default is Keyboard.
+	/// </summary>
+	public IInputProvider inputProvider { get { return _inputProvider; } set { if (value != null) _inputProvider = value; } }
 
 	public override Type[] RequiredComponents { get; } = new Type[] { typeof(Components.Input) };
 

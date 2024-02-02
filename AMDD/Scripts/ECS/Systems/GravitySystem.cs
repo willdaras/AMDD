@@ -5,8 +5,14 @@ using AMDD.ECS.Components;
 
 namespace AMDD.ECS.Systems;
 
+/// <summary>
+/// Applies gravity to all objects with a Gravity component.
+/// </summary>
 public class GravitySystem : System
 {
+	/// <summary>
+	/// The strength of gravity.
+	/// </summary>
 	public const float Gravity = 98f;
 
 	public override Type[] RequiredComponents { get; } = new Type[] { typeof(Physics), typeof(Gravity) };

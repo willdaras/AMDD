@@ -6,6 +6,9 @@ using System.Diagnostics;
 
 namespace AMDD.ECS.Systems;
 
+/// <summary>
+/// Moves the Camera to the player's position, and applies lookahead based on the player's velocity.
+/// </summary>
 public class CamFollowPlayerSystem : System
 {
 	public override Type[] RequiredComponents { get; } = new Type[] { typeof(Camera) };

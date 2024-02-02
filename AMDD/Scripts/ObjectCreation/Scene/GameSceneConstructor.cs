@@ -5,7 +5,10 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace AMDD.ObjectCreation.Scenes;
 
-public class GameSceneConstructor : Scene
+/// <summary>
+/// Constructs a gameplay scene.
+/// </summary>
+public class GameSceneConstructor : ISceneConstructor
 {
 	public Scene ConstructScene()
 	{

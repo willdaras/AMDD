@@ -4,6 +4,9 @@ using AMDD.Rendering;
 
 namespace AMDD.ObjectCreation.Scenes;
 
+/// <summary>
+/// Constructs a basic scene with the vital Entities and Systems added.
+/// </summary>
 public class BaseSceneConstructor : ISceneConstructor
 {
 	public Scene ConstructScene()

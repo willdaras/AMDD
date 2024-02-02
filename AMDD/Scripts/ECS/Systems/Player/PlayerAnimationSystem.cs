@@ -4,6 +4,9 @@ using System;
 
 namespace AMDD.ECS.Systems;
 
+/// <summary>
+/// A System that updates the player's AnimationTree with the current player state.
+/// </summary>
 public class PlayerAnimationSystem : System
 {
 	public override Type[] RequiredComponents { get; } = new Type[] { typeof(Player) };
@@ -16,7 +19,6 @@ public class PlayerAnimationSystem : System
 			Animated animated = entity.GetComponent<Animated>();
 			Grounded grounded = entity.GetComponent<Grounded>();
 			Shooting shooting = entity.GetComponent<Shooting>();
-			Sprite sprite = entity.GetComponent<Sprite>();
 			FacingDirection direction = entity.GetComponent<FacingDirection>();
 			animated.tree.currentState.Set("xVel", (int)physics.velocity.X);
 			animated.tree.currentState.SetBool("grounded", grounded.grounded);

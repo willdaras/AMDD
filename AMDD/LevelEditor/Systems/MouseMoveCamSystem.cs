@@ -6,6 +6,9 @@ using AMDD.ECS;
 
 namespace AMDD.LevelEditor.Systems;
 
+/// <summary>
+/// A System to allow the Camera to be moved with the middle mouse button.
+/// </summary>
 public class MouseMoveCamSystem : ECS.System
 {
 	public override Type[] RequiredComponents { get; } = new Type[] { typeof(Camera) };

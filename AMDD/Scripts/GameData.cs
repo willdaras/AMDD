@@ -3,6 +3,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace AMDD;
 
+/// <summary>
+/// Global game data.
+/// </summary>
 public static class GameData
 {
 	public static SpriteBatch spriteBatch;

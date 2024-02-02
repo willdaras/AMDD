@@ -5,15 +5,26 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Text.Json.Serialization;
 
 namespace AMDD.Rendering;
 
+/// <summary>
+/// A basic Camera that renders every sprite in its layermask.
+/// </summary>
 public class BasicLayerCamera : Camera
 {
-	public ECS.Components.Camera camera => GetComponent<ECS.Components.Camera>();
+	/// <summary>
+	/// The Camera component - stores data about the Camera.
+	/// </summary>
+	[JsonIgnore] public ECS.Components.Camera camera => GetComponent<ECS.Components.Camera>();
 
-	public override Rectangle bounds => new Rectangle((int)MathF.Round(position.position.X - (camera.size / 2).X), (int)MathF.Round(position.position.Y - (camera.size / 2).Y), camera.width, camera.height);
+	[JsonIgnore] public override Rectangle bounds => new Rectangle((int)MathF.Round(position.position.X - (camera.size / 2).X), (int)MathF.Round(position.position.Y - (camera.size / 2).Y), camera.width, camera.height);
 
+	/// <summary>
+	/// The layermask the Camera renders sprites on.
+	/// </summary>
+	/// <remarks> Use & and | to construct and test the layermask. </remarks>
 	public Sprite.Layer renderLayers = Sprite.Layer.Default;
 
 	public BasicLayerCamera(Vector2 size)

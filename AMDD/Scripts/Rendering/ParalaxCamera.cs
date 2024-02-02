@@ -8,6 +8,9 @@ using System.Diagnostics;
 
 namespace AMDD.Rendering;
 
+/// <summary>
+/// A layer Camera that renders its layers with a paralax effect.
+/// </summary>
 public class ParalaxCamera : BasicLayerCamera
 {
 	private float _scaleX = 0.5f;

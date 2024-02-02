@@ -12,6 +12,10 @@ using AMDD.ECS.Components.UI;
 
 namespace AMDD.LevelEditor.Systems;
 
+/// <summary>
+/// A System to save the scene to a file.
+/// </summary>
+/// <remarks> Currently saves to the file test_editor_level.json. </remarks>
 public class SaveSceneSystem : ECS.System
 {
 	public override Type[] RequiredComponents { get; }
@@ -47,6 +51,10 @@ public class SaveSceneSystem : ECS.System
 		}
 	}
 
+	/// <summary>
+	/// Saves the EntityMap to the file test_editor_level.json.
+	/// </summary>
+	/// <param name="entities"> The EntityMap to save. </param>
 	public void Save(EntityMap entities)
 	{
 		Debug.WriteLine("Attempting to save");
@@ -54,6 +62,10 @@ public class SaveSceneSystem : ECS.System
 		Debug.WriteLine("Save processed");
 		_saveInterpreter.Write("test_editor_level", entities);
 	}
+	/// <summary>
+	/// Loads the level test_editor_level.json to a new Scene and sets it to the active scene.
+	/// </summary>
+	/// <param name="entities"></param>
 	public void Load(EntityMap entities)
 	{
 		Debug.WriteLine("Loading Level");

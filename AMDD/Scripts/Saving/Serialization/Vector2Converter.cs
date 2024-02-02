@@ -7,8 +7,16 @@ using System.Text.Json.Serialization;
 
 namespace AMDD.SaveSystem.Serialization;
 
+/// <summary>
+/// A custom converter for Vector2 object as the JsonSerializer has trouble serializing and deserializing them.
+/// </summary>
 public class Vector2Converter : JsonConverter<Vector2>
 {
+	/// <summary>
+	/// Converts the JSON to a Vector2.
+	/// </summary>
+	/// <returns> The deserialized Vector2. </returns>
+	/// <exception cref="JsonException"></exception>
 	public override Vector2 Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
 		Debug.WriteLine("Trying to deserialize Vector2");
@@ -59,6 +67,9 @@ public class Vector2Converter : JsonConverter<Vector2>
 		throw new JsonException("Unexpected JSON structure");
 	}
 
+	/// <summary>
+	/// Writes the Vector2 to JSON.
+	/// </summary>
 	public override void Write(Utf8JsonWriter writer, Vector2 value, JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
@@ -72,21 +83,3 @@ public class Vector2Converter : JsonConverter<Vector2>
 		writer.WriteEndObject();
 	}
 }
-
-/*[JsonPolymorphic(TypeDiscriminatorPropertyName = "Vector2")]
-public class VectorSubstitute
-{
-	public float X { get; set; }
-	public float Y { get; set; }
-
-	public static explicit operator Vector2(VectorSubstitute substitute)
-	{
-		Vector2 newVector = new Vector2(substitute.X, substitute.Y);
-		return newVector;
-	}
-
-	public static explicit operator VectorSubstitute(Vector2 vector)
-	{
-		return new VectorSubstitute() { X = vector.X, Y = vector.Y };
-	}
-}*/

@@ -4,6 +4,9 @@ using System.Diagnostics;
 
 namespace AMDD.ECS.Systems;
 
+/// <summary>
+/// Applies damage from an Entity's DamageBuffer to its health, also handles invincibility.
+/// </summary>
 public class HealthSystem : System
 {
 	public override Type[] RequiredComponents { get; } = new Type[] { typeof(Health), typeof(DamageBuffer) };

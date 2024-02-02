@@ -5,15 +5,25 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Text.Json.Serialization;
 
 namespace AMDD.Rendering;
 
+/// <summary>
+/// A Stack of Cameras that render sequentially over the previous.
+/// </summary>
 public class BasicCameraStack : Camera
 {
-	public ECS.Components.Camera camera => GetComponent<ECS.Components.Camera>();
+	/// <summary>
+	/// The Camera component - stores data about the Camera.
+	/// </summary>
+	[JsonIgnore] public ECS.Components.Camera camera => GetComponent<ECS.Components.Camera>();
 
-	public override Rectangle bounds => new Rectangle((int)MathF.Round(position.position.X - (camera.size / 2).X), (int)MathF.Round(position.position.Y - (camera.size / 2).Y), camera.width, camera.height);
+	[JsonIgnore] public override Rectangle bounds => new Rectangle((int)MathF.Round(position.position.X - (camera.size / 2).X), (int)MathF.Round(position.position.Y - (camera.size / 2).Y), camera.width, camera.height);
 
+	/// <summary>
+	/// The stack of Cameras to render with.
+	/// </summary>
 	public List<Camera> stack = new List<Camera>();
 
 	public BasicCameraStack(Vector2 size)

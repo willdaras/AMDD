@@ -53,37 +53,6 @@ namespace AMDD
 			//_scene.preDrawSystems.Add(new CamFollowPlayerSystem());
 			Scene scene = new LevelEditor.LevelEditorSceneConstructor().ConstructScene();
 
-
-			// TODO: use this.Content to load your game content here
-
-			/*			_scene.systems.Add(new InstantiationSystem());
-						_scene.systems.Add(new InputSystem());
-						_scene.systems.Add(new GravitySystem());
-						_scene.systems.Add(new PlayerControllerSystem());
-						_scene.systems.Add(new PlayerAnimationSystem());
-						_scene.systems.Add(new BulletSystem());
-						_scene.systems.Add(new AnimationSystem());
-						_scene.systems.Add(new HealthSystem());
-						_scene.systems.Add(new DestroyOnHealthZeroSystem());
-						_scene.preDrawSystems.Add(new CamFollowPlayerSystem());
-
-						Rendering.Camera camera = new BasicCamera(240, 160);
-						camera.SetActive();
-						_scene.entityMap.AddNewEntity(camera);*/
-
-			// TODO this is disgusting, FIX
-			/*			Entity entity = new SceneEntity();
-						entity.GetComponent<Name>().name = "player";
-						entity.GetComponent<Position>().position = new Vector2(70, 0);
-						entity.AddComponent<Player>();
-						entity.AddComponent<FacingDirection>();
-						entity.AddComponent(new Sprite() { image = _defaultPlayerTexture}); entity.AddComponent<Input>(); entity.AddComponent(new Physics() { dragScale=2f, xDragScale=4f });
-						entity.AddComponent(new Shooting() { bulletPool = new ObjectCreation.ObjectPool(new ObjectCreation.BulletConstructor(), 20) });
-						entity.AddComponent(new Gravity() { gravityScale = 5f }); entity.AddComponent(new Collider() { collider = new Rectangle(0, 0, 14, 31), offset = new Vector2(3, 0), continuous = true });
-						entity.AddComponent(new Animated() { tree = GetPlayerTree.ConstructPlayerTree(Content) });
-						entity.AddComponent<Grounded>();*/
-			//_scene.entityMap.AddNewEntity(new ObjectCreation.PlayerConstructor().ConstructObject());
-
 			Entity ground = new SceneEntity();
 			ground.GetComponent<Position>().position = new Vector2(0, 64);
 			//ground.AddComponent(new Sprite() { image = Content.Load<Texture2D>("Sprites/Tiles/backgrounds/artaria_first_background"), layer = Sprite.Layer.Sprites, address = "Sprites/Tiles/backgrounds/artaria_first_background" });
@@ -109,7 +78,7 @@ namespace AMDD
 		protected override void Draw(GameTime gameTime)
 		{
 			GraphicsDevice.SetRenderTarget(_renderTarget);
-			GraphicsDevice.Clear(Color.CornflowerBlue);
+			GraphicsDevice.Clear(new Color(17, 20, 23));
 			Scene.activeScene.Draw(gameTime);
 			GraphicsDevice.SetRenderTarget(null);
 			_spriteBatch.Begin(samplerState: SamplerState.PointClamp);

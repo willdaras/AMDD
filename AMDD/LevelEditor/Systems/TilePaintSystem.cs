@@ -8,10 +8,12 @@ using AMDD.LevelEditor.Tiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using static System.Formats.Asn1.AsnWriter;
 
 namespace AMDD.LevelEditor.Systems;
 
+/// <summary>
+/// A System to allow painting tiles to the level.
+/// </summary>
 public class TilePaintSystem : ECS.System
 {
 	public override Type[] RequiredComponents { get; }
@@ -32,7 +34,13 @@ public class TilePaintSystem : ECS.System
 	private List<ITileFactory> _tileFactories = new List<ITileFactory>() { new CollisionTileFactory(), new TileFactory() };
 	private List<Color> _cursorColors = new List<Color>() { Color.Green, Color.Blue };
 	private int _factoryIndex = 0;
+	/// <summary>
+	/// The current TileFactory in use.
+	/// </summary>
 	public ITileFactory tileFactory => _tileFactories[_factoryIndex];
+	/// <summary>
+	/// The Current cursor colour.
+	/// </summary>
 	public Color cursorColor => _cursorColors[_factoryIndex];
 
 	private int _prevScrollValue = 0;

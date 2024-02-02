@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace AMDD.Animation.Nodes;
 
 /// <summary>
-/// A basic implementation of an animation node.
+/// A TerminationNode that stores an animation.
 /// </summary>
 public class BasicAnimationNode : TerminationNode
 {

@@ -2,6 +2,9 @@ using Microsoft.Xna.Framework;
 
 namespace AMDD.ECS.Components;
 
+/// <summary>
+/// The physics values of an Entity.
+/// </summary>
 public class Physics : Component
 {
 	public Vector2 velocity { get; set; } = Vector2.Zero;

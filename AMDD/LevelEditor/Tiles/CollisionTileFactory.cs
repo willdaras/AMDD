@@ -5,6 +5,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace AMDD.LevelEditor.Tiles;
 
+/// <summary>
+/// A TileFactory that constructs tiles with Colliders.
+/// </summary>
 public class CollisionTileFactory : ITileFactory
 {
 	public SceneEntity GetTile(Vector2 position, Texture2D texture, string texAddress, int layer = (int)Sprite.Layer.Sprites)

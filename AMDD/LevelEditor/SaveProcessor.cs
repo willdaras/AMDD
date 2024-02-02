@@ -9,8 +9,16 @@ using System.Linq;
 
 namespace AMDD.LevelEditor;
 
+/// <summary>
+/// Processes and filters an EntityMap, preparing it for serialization and deserialization.
+/// </summary>
 public class SaveProcessor
 {
+	/// <summary>
+	/// Processes and filters an EntityMap.
+	/// </summary>
+	/// <param name="entities"> The EntityMap to filter. </param>
+	/// <returns> The filtered EntityMap. </returns>
 	public static EntityMap ProcessSaveForSerialization(EntityMap entities)
 	{
 		List<Entity> entitiesList = entities.ToList();
@@ -40,6 +48,11 @@ public class SaveProcessor
 		entities = new EntityMap(finalList);
 		return entities;
 	}
+	/// <summary>
+	/// Filters an EntityMap for deserialization removing Entities that shouldn't stay and adding extra Entities.
+	/// </summary>
+	/// <param name="entities"> The EntityMap to filter. </param>
+	/// <returns> The finalized EntityMap. </returns>
 	public static EntityMap ProcessSaveForDeserialization(EntityMap entities)
 	{
 		List<Entity> entitiesList = entities.ToList();

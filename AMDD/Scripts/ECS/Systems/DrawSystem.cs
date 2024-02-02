@@ -8,6 +8,9 @@ using System.Diagnostics;
 
 namespace AMDD.ECS.Systems;
 
+/// <summary>
+/// Triggers the active camera to draw every sprite in the scene. Handles drawing UI with a UI camera.
+/// </summary>
 public class DrawSystem : System
 {
 	public override Type[] RequiredComponents { get; } = new Type[] { typeof(Sprite) };

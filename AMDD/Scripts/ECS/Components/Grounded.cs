@@ -1,5 +1,8 @@
 namespace AMDD.ECS.Components;
 
+/// <summary>
+/// Whether the Entity is grounded.
+/// </summary>
 public class Grounded : Component
 {
 	public bool grounded { get; set; } = false;

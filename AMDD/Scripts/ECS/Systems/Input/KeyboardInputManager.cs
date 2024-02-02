@@ -3,9 +3,13 @@ using Microsoft.Xna.Framework.Input;
 
 namespace AMDD.ECS.Systems.Input;
 
+/// <summary>
+/// Handles keyboard input.
+/// </summary>
 public class KeyboardInputManager : IInputProvider
 {
 	private bool _shootingLastFrame;
+
 	public InputState GetInputState(InputState inputState = new InputState())
 	{
 		KeyboardState state = Keyboard.GetState();
@@ -32,12 +36,12 @@ public class KeyboardInputManager : IInputProvider
 		return false;
 	}
 
-	public Vector2 MoveDir(KeyboardState state)
+	private Vector2 MoveDir(KeyboardState state)
 	{
 		if (state.IsKeyDown(Keys.Space)) return Vector2.Zero;
 		return GetDir(state);
 	}
-	public Vector2 AimDir(KeyboardState state)
+	private Vector2 AimDir(KeyboardState state)
 	{
 		Vector2 dir = GetDir(state);
 		return dir;

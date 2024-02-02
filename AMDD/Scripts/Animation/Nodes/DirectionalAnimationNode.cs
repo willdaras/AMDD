@@ -5,6 +5,7 @@ namespace AMDD.Animation.Nodes;
 /// <summary>
 /// An directional animation node to differentiate between left and right animations.
 /// </summary>
+/// <remarks> Uses the facingRight parameter in the AnimatorState to decide its direction. </remarks>
 public class DirectionalAnimationNode : TerminationNode
 {
 	private Animator.Animation _animationL;
