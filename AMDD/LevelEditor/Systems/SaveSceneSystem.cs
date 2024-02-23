@@ -9,6 +9,7 @@ using System.Net.Http.Headers;
 using System.Diagnostics;
 using AMDD.Rendering;
 using AMDD.ECS.Components.UI;
+using System.Text.Json;
 
 namespace AMDD.LevelEditor.Systems;
 
@@ -27,6 +28,9 @@ public class SaveSceneSystem : ECS.System
 
 	private bool _loadPressed;
 
+	private LevelLoadPreferences _prefs;
+	public string level => _prefs.levelToLoad;
+
 	public SaveSceneSystem()
 	{
 		_levelLoader = new FileLevelLoader(GameData.contentManager);
@@ -39,6 +43,7 @@ public class SaveSceneSystem : ECS.System
 			_savePressed = true;
 		else if (_savePressed)
 		{
+			_prefs = JsonSerializer.Deserialize<LevelLoadPreferences>(_levelLoader.Load("level_load_preferences"));
 			_savePressed = false;
 			Save(entities);
 		}
@@ -46,6 +51,7 @@ public class SaveSceneSystem : ECS.System
 			_loadPressed = true;
 		else if (_loadPressed)
 		{
+			_prefs = JsonSerializer.Deserialize<LevelLoadPreferences>(_levelLoader.Load("level_load_preferences"));
 			_loadPressed = false;
 			Load(entities);
 		}
@@ -60,7 +66,7 @@ public class SaveSceneSystem : ECS.System
 		Debug.WriteLine("Attempting to save");
 		entities = SaveProcessor.ProcessSaveForSerialization(entities);
 		Debug.WriteLine("Save processed");
-		_saveInterpreter.Write("test_editor_level", entities);
+		_saveInterpreter.Write(level, entities);
 	}
 	/// <summary>
 	/// Loads the level test_editor_level.json to a new Scene and sets it to the active scene.
@@ -69,7 +75,7 @@ public class SaveSceneSystem : ECS.System
 	public void Load(EntityMap entities)
 	{
 		Debug.WriteLine("Loading Level");
-		EntityMap loaded = _saveInterpreter.Interpret("test_editor_level");
+		EntityMap loaded = _saveInterpreter.Interpret(level);
 		loaded = SaveProcessor.ProcessSaveForDeserialization(loaded);
 		bool editor = Keyboard.GetState().IsKeyDown(Keys.D8);
 		Scene loadedScene = editor ? new LevelEditorSceneConstructor().ConstructScene() : new ObjectCreation.Scenes.GameSceneConstructor().ConstructScene();

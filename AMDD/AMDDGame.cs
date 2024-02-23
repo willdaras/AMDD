@@ -12,12 +12,6 @@ namespace AMDD
 		private SpriteBatch _spriteBatch;
 		private RenderTarget2D _renderTarget;
 
-		private Scene _scene;
-
-		#region Sprites
-		private Texture2D _defaultPlayerTexture;
-		#endregion
-
 		public AMDDGame()
 		{
 			_graphics = new GraphicsDeviceManager(this);
@@ -31,6 +25,7 @@ namespace AMDD
 
 			_graphics.PreferredBackBufferWidth = (int)(GameData.screenX * GameData.upscaleScale);
 			_graphics.PreferredBackBufferHeight = (int)(GameData.screenY * GameData.upscaleScale);
+
 			_graphics.ApplyChanges();
 
 			base.Initialize();
@@ -47,7 +42,6 @@ namespace AMDD
 			_spriteBatch = new SpriteBatch(GraphicsDevice);
 
 			SetGlobalData();
-			_defaultPlayerTexture = Content.Load<Texture2D>("Sprites/Player/right/player_run/player_run_right1");
 
 			//_scene = new ObjectCreation.Scenes.BaseSceneConstructor().ConstructScene();
 			//_scene.preDrawSystems.Add(new CamFollowPlayerSystem());
@@ -55,7 +49,7 @@ namespace AMDD
 
 			Entity ground = new SceneEntity();
 			ground.GetComponent<Position>().position = new Vector2(0, 64);
-			//ground.AddComponent(new Sprite() { image = Content.Load<Texture2D>("Sprites/Tiles/backgrounds/artaria_first_background"), layer = Sprite.Layer.Sprites, address = "Sprites/Tiles/backgrounds/artaria_first_background" });
+
 			ground.AddComponent<Static>(); ground.AddComponent(new Collider() { collider = new Rectangle(0, 120, 400, 100) });
 			scene.entityMap.AddNewEntity(ground);
 
@@ -78,9 +72,11 @@ namespace AMDD
 		protected override void Draw(GameTime gameTime)
 		{
 			GraphicsDevice.SetRenderTarget(_renderTarget);
+			_graphics.ApplyChanges();
 			GraphicsDevice.Clear(new Color(17, 20, 23));
 			Scene.activeScene.Draw(gameTime);
 			GraphicsDevice.SetRenderTarget(null);
+			_graphics.ApplyChanges();
 			_spriteBatch.Begin(samplerState: SamplerState.PointClamp);
 			_spriteBatch.Draw(_renderTarget, new Rectangle(0, 0, 720, 480), Color.White);
 			_spriteBatch.End();

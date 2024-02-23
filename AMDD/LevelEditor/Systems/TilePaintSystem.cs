@@ -46,7 +46,7 @@ public class TilePaintSystem : ECS.System
 	private int _prevScrollValue = 0;
 
 	private bool _layerKeyDown;
-	private int _layer = 1;
+	private int _layer = 2;
 	private SceneEntity _layerDisplay;
 
 	public override void Update(EntityMap entities, float deltaTime)
